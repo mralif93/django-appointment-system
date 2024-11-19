@@ -1,0 +1,10 @@
+appointments/db.sqlite3
+appointments/static/*
+appointments/media/*
+appointments/api/static/*
+appointments/api/migrations/*
+appointments/frontend/static/*
+appointments/frontend/migrations/*
+appointments/backend/static/*
+appointments/backend/migrations/*
+appointments/.env

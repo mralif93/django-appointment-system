@@ -1,0 +1,124 @@
+{% extends 'backend/master/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Payment - Sakeenah Medicare {% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+{% if view == 'create' %}
+<div class="row">
+	<div class="col">
+		<div class="text-start">
+			<a href="{% url 'list_payment_view' %}">Back</a>
+		</div>
+		<div class="card mt-4">
+			<div class="card-header">
+				<h4 class="card-title">Create New Payment</h4>
+			</div>
+			<form method="POST">
+				<div class="card-body">
+					{% csrf_token %}
+					{{ form | crispy }}
+				</div>
+				<div class="card-footer text-end">
+					<button type="reset" class="btn btn-secondary w-25">Reset</button>
+					<button type="submit" class="btn btn-warning w-25">Create</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% elif view == 'read' %}
+<div class="row">
+	<div class="col">
+		<h4 class="card-title">Details of Payment</h4>
+	</div>
+</div>
+{% elif view == 'update' %}
+<div class="row">
+	<div class="col">
+		<div class="text-start">
+			<a href="{% url 'list_payment_view' %}">Back</a>
+		</div>
+
+		<div class="card mt-4">
+			<div class="card-header">
+				<h4 class="card-title">Update Details Payment</h4>
+			</div>
+			<form method="POST" enctype="multipart/form-data">
+				<div class="card-body">
+					{% csrf_token %}
+					{{ form | crispy }}
+				</div>
+				<div class="card-footer text-end">
+					<button type="reset" class="btn btn-secondary w-25">Reset</button>
+					<button type="submit" class="btn btn-warning w-25">Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% elif view == 'delete' %}
+<div class="row">
+	<div class="col">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Delete Confirmation</h4>
+			</div>
+			<form method="POST">
+				<div class="card-body">
+					{% csrf_token %}
+					<div class="mb-0">Are you confirm to delete payment for <b>{{ payment.appointment }}</b>?</div>
+				</div>
+				<div class="card-footer text-end">
+					<a href="{% url 'list_doctor_view' %}" class="btn btn-secondary w-25">Cancel</a>
+					<button type="submit" class="btn btn-danger w-25">Delete</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% else %}
+<div class="row mt-4">
+	<div class="text-start">
+		<a href="{% url 'dashboard_view' %}">Back</a>
+	</div>
+	<div class="col mt-4">
+		<div class="card">
+			<div class="card-header text-end">
+				<a href="{% url 'create_payment_view' %}" type="button" class="btn btn-warning w-25">New Payment</a>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-stripped">
+						<thead class="table-dark">
+							<tr>
+								<th scope="col">Appointment</th>
+								<th scope="col">Amount</th>
+								<th scope="col">Date</th>
+								<th scope="col">Status</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+						{% if payments %}
+							{% for payment in payments %}
+								<tr>
+									<td scope="row">{{ payment.appointment | default:'-' }}</td>
+									<td>{{ payment.amount | default:'-' }}</td>
+									<td>{{ payment.date | default:'-' }}</td>
+									<td>{{ payment.status | default:'-' }}</td>
+									<td class="text-end"><a href="{% url 'update_proof_payment_view' payment.id %}">Proof</a> | <a href="{% url 'update_payment_view' payment.id %}">Update</a> | <a href="{% url 'delete_payment_view' payment.id %}">Delete</a></td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock content %}
+{% block js %}{% endblock js %}

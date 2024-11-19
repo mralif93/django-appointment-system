@@ -1,0 +1,35 @@
+{% extends 'backend/master/base.html' %}
+
+{% block title %} Booking Management System {% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+	<div class="col-md-5">
+		<div class="card shadow-sm">
+			<div class="card-header text-center bg-warning text-white">
+				<h3>Sakeenah Medicare</h3>
+			</div>
+			<div class="card-body">
+				<form method="POST">
+					{% csrf_token %}
+					<div class="mb-3">
+						<label for="username" class="form-label">Username</label>
+						<input type="text" id="username" name="username" class="form-control" required>
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label">Password</label>
+						<input type="password" id="password" name="password" class="form-control" required>
+					</div>
+					<div class="mb-3">
+						<input type="checkbox" id="remember" name="remember" class="form-check-input">
+						<label for="remember" class="form-check-label">&nbsp;Remember Me</label>
+					</div>
+					<button type="submit" class="btn btn-warning w-100 text-white text-uppercase">Login</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+{% block js %}{% endblock js %}

@@ -1,0 +1,31 @@
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'error' %}
+      <div class="alert alert-danger" role="alert">
+        <strong class="text-uppercase">{{message.tags}}!</strong> {{ message }}
+      </div>
+    {% else %}
+      <div class="alert alert-{{message.tags}}" role="alert">
+        <strong class="text-uppercase">{{message.tags}}!</strong> {{ message }}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if form.errors %}
+  {% for field in form %}
+      {% for error in field.errors %}
+      <div class="alert alert-danger" role="alert">
+        <strong class="text-uppercase">ERROR!</strong> {{ error }}
+      </div>
+      {% endfor %}
+  {% endfor %}
+{% endif %}
+
+{% if form.non_field_errors %}
+  {% for error in form.non_field_errors %}
+  <div class="alert alert-danger" role="alert">
+    <strong class="text-uppercase">ERROR!</strong> {{ error }}
+  </div>
+  {% endfor %}
+{% endif %}

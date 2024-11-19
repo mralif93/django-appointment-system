@@ -1,0 +1,8 @@
+Django
+django-environ
+django-filter
+djangorestframework
+Markdown
+django-crispy-forms
+crispy-bootstrap5
+psycopg2-binary
