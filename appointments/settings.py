@@ -169,6 +169,9 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# automatic slash adding
+APPEND_SLASH = True
+
 # Bootstrap Template
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
