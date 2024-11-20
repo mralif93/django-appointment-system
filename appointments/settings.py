@@ -159,12 +159,11 @@ if env('ENVIRONMENT') == 'DEV':
 	MEDIA_URL = '/media/'
 else:
 	# Configuration
-	STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-	STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+    STATIC_URL = '/static/'
 
-	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-	MEDIA_URL = '/media/'
-
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URLS ='/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -182,13 +181,20 @@ LOGIN_URL = 'login_view'
 LOGIN_REDIRECT_URL = 'dashboard_view'
 LOGOUT_REDIRECT_URL = 'login_view'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'mr.alif.93@gmail.com'
-EMAIL_HOST_PASSWORD = 'muhd@mir91'  # Use a secure method to store credentials
-
+if env('ENVIRONMENT') == 'DEV':
+    EMAIL_BACKEND = env('L_EMAIL_BACKEND')
+    EMAIL_HOST = env('L_EMAIL_HOST')
+    EMAIL_PORT = env('L_EMAIL_PORT')
+    EMAIL_USE_TLS = env('L_EMAIL_USE_TLS')
+    EMAIL_HOST_USER = env('L_EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('L_EMAIL_HOST_PASSWORD')
+else:
+    EMAIL_BACKEND = env('S_EMAIL_BACKEND')
+    EMAIL_HOST = env('S_EMAIL_HOST')
+    EMAIL_PORT = env('S_EMAIL_PORT')
+    EMAIL_USE_TLS = env('S_EMAIL_USE_TLS')
+    EMAIL_HOST_USER = env('S_EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('S_EMAIL_HOST_PASSWORD')
 
 # message tags
 MESSAGE_TAGS = {
